@@ -1,16 +1,17 @@
 package com.aconex.cost.contract.controllers;
 
+import com.aconex.cost.contract.models.Contract;
 import com.aconex.cost.contract.services.ContractService;
 import io.dropwizard.hibernate.UnitOfWork;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/contracts")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ContractsController {
 
     private final ContractService contractService;
@@ -22,6 +23,14 @@ public class ContractsController {
     @GET
     @UnitOfWork
     public Response index() {
-        return Response.ok(contractService.findAll()).build();
+        List<Contract> contracts = contractService.findAll();
+        return Response.ok(contracts).build();
     }
+
+    @POST
+    @UnitOfWork
+    public Response create(Contract contracts) {
+        return Response.ok(contractService.createContract(contracts)).build();
+    }
+
 }

@@ -16,4 +16,8 @@ public class ContractService {
     public List<Contract> findAll() {
         return contractRepository.findAll();
     }
+
+    public Contract createContract(Contract contract) {
+        return contractRepository.createContract(contract);
+    }
 }

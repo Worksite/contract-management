@@ -18,4 +18,9 @@ public class ContractRepository {
     public List<Contract> findAll() {
         return sessionFactory.getCurrentSession().createCriteria(Contract.class).addOrder(Order.asc("code")).list();
     }
+
+    public Contract createContract(Contract contract) {
+        sessionFactory.getCurrentSession().save(contract);
+        return contract;
+    }
 }
