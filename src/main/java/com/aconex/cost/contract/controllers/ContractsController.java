@@ -26,11 +26,4 @@ public class ContractsController {
         List<Contract> contracts = contractService.findAll();
         return Response.ok(contracts).build();
     }
-
-    @POST
-    @UnitOfWork
-    public Response create(Contract contracts) {
-        return Response.ok(contractService.createContract(contracts)).build();
-    }
-
 }

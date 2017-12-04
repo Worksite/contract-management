@@ -4,7 +4,7 @@
 CREATE TABLE contracts (
   id               INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   project_id       INT,
-  code             VARCHAR(100)                   UNIQUE NOT NULL,
+  code             VARCHAR(100)                   NOT NULL,
   description      TEXT,
   vendor           TEXT,
   percent_complete NUMERIC                        NOT NULL DEFAULT 0,

@@ -10,11 +10,6 @@
                     controllerAs: 'ContractsCtrl',
                     templateUrl: '/components/contract/index.html'
                 })
-                .when('/contracts/new', {
-                    controller: 'ContractsCtrl',
-                    controllerAs: 'ContractsCtrl',
-                    templateUrl: '/components/contract/new.html'
-                })
                 .otherwise({
                     redirectTo: '/contracts'
                 });
