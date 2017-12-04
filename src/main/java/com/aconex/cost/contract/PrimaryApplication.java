@@ -2,6 +2,7 @@ package com.aconex.cost.contract;
 
 import com.aconex.cost.contract.config.ApplicationConfiguration;
 import com.aconex.cost.contract.controllers.ContractsController;
+import com.aconex.cost.contract.mapping.exception.ConstraintViolationExceptionMapper;
 import com.aconex.cost.contract.models.Contract;
 import com.aconex.cost.contract.repositories.ContractRepository;
 import com.aconex.cost.contract.services.ContractService;
@@ -59,5 +60,6 @@ public class PrimaryApplication extends Application<ApplicationConfiguration> {
         final ContractService contractService = new ContractService(contractRepository);
 
         environment.jersey().register(new ContractsController(contractService));
+        environment.jersey().register(new ConstraintViolationExceptionMapper());
     }
 }
