@@ -1,14 +1,19 @@
 package com.aconex.cost.contract.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "contracts")
 public class Contract {
 
     private Long id;
+    private List<Contract> dependentContracts = new ArrayList<>();
+    private Contract parent;
 
     private String code;
     private String description;
@@ -19,7 +24,6 @@ public class Contract {
     private double forecast;
     private double paid;
     private double percentComplete;
-
     private DateTime createdAt;
 
     @Id
@@ -31,6 +35,26 @@ public class Contract {
     public Contract setId(Long id) {
         this.id = id;
         return this;
+    }
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    public Contract getParent() {
+        return parent;
+    }
+
+    public void setParent(Contract parent) {
+        this.parent = parent;
+    }
+
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
+    public List<Contract> getDependentContracts() {
+        return dependentContracts;
+    }
+
+    public void setDependentContracts(List<Contract> dependentContracts) {
+        this.dependentContracts = dependentContracts;
     }
 
     @Column(name = "created_at")
